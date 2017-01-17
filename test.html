@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="http://dlweb.sogoucdn.com/common/lib/jquery/jquery-2.1.4.min.js" ></script>
+    <title></title>
+</head>
+<body>
+<div  id="rainbox"></div>
+<script type="text/javascript">
+    function loadScript(src, callback) {
+        var script = document.createElement('script'), head = document.getElementsByTagName('head')[0];
+        script.type = 'text/javascript';
+        script.charset = 'UTF-8';
+        script.src = src;
+        if (script.addEventListener) {
+            script.addEventListener('load', function () {
+                callback();
+            }, false);
+        } else if (script.attachEvent) {
+            script.attachEvent('onreadystatechange', function () {
+                var target = window.event.srcElement;
+                if (target.readyState == 'loaded') {
+                    alert('ie onload');
+                    callback();
+                }
+            });
+        }
+        head.appendChild(script);
+    }
+    loadScript("http://code.jquery.com/jquery-1.9.1.js",function(){
+        loadScript("./rain-canvas.js",function(){
+            var elem = document.getElementById('rainbox');
+            var canvasElem = document.createElement('canvas');
+            canvasElem.width = 500;
+            canvasElem.height = 300;
+            canvasElem.style.backgroundColor = '#000000';
+            canvasElem.id = 'rain' ;
+            elem.appendChild(canvasElem);
+            $(canvasElem).let_it_rain({
+                speed: 10, //1-100
+                angle: 30, // 0-90
+                maxHeight: 25,  // 0-
+                color: '#ffffff',
+                count:40, //>=1
+                opacity:'0.6'
+            });
+        });
+    })
+
+</script>
+</body>
+
+</html>
